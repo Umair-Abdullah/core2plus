@@ -1,0 +1,92 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="my_test.list">
+            <field name="name">my_test list</field>
+            <field name="model">my.view</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="all_sale_orders"/>
+                    <field name="my_sales"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_my_view_form">
+            <field name="name">my.view.form.view</field>
+            <field name="model">my.view</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="get_records" type="object" class="btn-secondary" string="get records"/>
+                        <button name="clear_list" type="object" class="btn-secondary" string="Clear List"/>
+                    </header>
+                    <sheet>
+
+                        <group>
+                            <group>
+                                <field name="name"/>
+
+                            </group>
+                            <group>
+                                <field name="partner_id"/>
+                            </group>
+                            <field name="all_sale_orders"/>
+
+                            <field name="my_sales">
+                                <tree editable="bottom" no_create="1" >
+                                    <field name="name"/>
+                                    <field name="partner_id"/>
+                                    <field name="sales_person"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="my_test.new_my_action_window">
+            <field name="name">my_test window</field>
+            <field name="res_model">my.view</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- server action to the one above -->
+        <!--
+            <record model="ir.actions.server" id="my_test.action_server">
+              <field name="name">my_test server</field>
+              <field name="model_id" ref="model_my_test_my_test"/>
+              <field name="state">code</field>
+              <field name="code">
+                action = {
+                  "type": "ir.actions.act_window",
+                  "view_mode": "tree,form",
+                  "res_model": model._name,
+                }
+              </field>
+            </record>
+        -->
+
+        <!-- Top menu item -->
+
+        <!--    <menuitem name="my_test" id="my_test.menu_root"/>-->
+
+        <!-- menu categories -->
+        <!--
+            <menuitem name="Menu 1" id="my_test.menu_1" parent="my_test.menu_root"/>
+            <menuitem name="Menu 2" id="my_test.menu_2" parent="my_test.menu_root"/>
+        -->
+        <!-- actions -->
+
+        <menuitem name="List" id="my_test.action_window" parent="sale.menu_sales_config"
+                  action="my_test.new_my_action_window"/>
+        <!--    <menuitem name="Server to list" id="my_test" parent="my_test.menu_2"-->
+        <!--              action="my_test.action_server"/>-->
+
+    </data>
+</odoo>
