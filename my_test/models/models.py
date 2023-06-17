@@ -10,6 +10,24 @@ class MyViewTesting(models.Model):
     all_sale_orders = fields.Many2many('sale.order')
     partner_id = fields.Many2one('res.partner')
     my_sales = fields.One2many('my.sales', 'my_view')
+    yes_no = fields.Selection([('yes','Yes'),('no','No')])
+    state = fields.Selection(
+        selection=[
+            ('draft', 'Draft'),
+            ('posted', 'Posted'),
+            ('cancel', 'Cancelled'),
+        ],
+        string='Status',
+        required=True,
+        readonly=True,
+        copy=False,
+        tracking=True,
+        default='draft',
+    )
+    def approved(self):
+        self.state = 'posted'
+    def reject(self):
+        self.state = 'cancel'
 
     def clear_list(self):
         self.my_sales.unlink()

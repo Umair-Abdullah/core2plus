@@ -26,7 +26,8 @@
     'data': [
         'security/ir.model.access.csv',
         'views/views.xml',
-        'views/templates.xml',
+        'report/test_report.xml',
+        'report/report_button.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
